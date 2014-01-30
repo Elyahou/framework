@@ -222,4 +222,24 @@ class Collection extends BaseCollection {
 		return new BaseCollection($this->items);
 	}
 
+	/**
+	 * Get a subset of the items from the collection.
+	 *
+	 * @param  array  $keys
+	 * @return array
+	 */
+	public function only($keys)
+	{
+		$keys = is_array($keys) ? $keys : func_get_args();
+
+		$items = array();
+
+		foreach ($this->items as $values)
+		{
+			$items[] = array_only($values->toArray(), $keys);
+		}
+
+		return $items;
+	}
+
 }
